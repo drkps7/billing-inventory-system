@@ -59,8 +59,7 @@ A full-featured billing, GST invoicing, and inventory management system built fo
 1. Create a project at [console.firebase.google.com](https://console.firebase.google.com)
 2. Enable **Firestore Database** (start in test mode)
 3. Enable **Authentication → Email/Password**
-4. Go to Project Settings → Your Apps → Add Web App
-5. Copy the config object
+4. Go to Project Settings → Your Apps → Add Web App → copy the config
 
 ### 2. Configure the app
 
@@ -77,7 +76,7 @@ firebase.initializeApp({
 });
 ```
 
-Also update the `COMPANY` constant near the top with your business details.
+Also update the `COMPANY` constant with your business name, address and GSTIN.
 
 ### 3. Firestore Security Rules
 
@@ -98,30 +97,20 @@ Upload `index.html` to [Cloudflare Pages](https://pages.cloudflare.com) via dire
 
 ### 5. First run
 
-1. Open the app → you'll see the Setup screen
+1. Open the app → Setup screen appears
 2. Create your owner account
-3. Go to **Settings → Company** and fill in your business details
-4. Import your product master via **Settings → Data & Import**
-
----
-
-## Project Structure
-
-```
-index.html              # Entire application — React JSX, CSS, Firebase init
-new_products.json       # Schema for product import (replace with your data)
-stock_update.json       # Schema for stock update operations
-```
+3. **Settings → Company** → fill in your business details
+4. **Settings → Data & Import** → load your product master
 
 ---
 
 ## Key Design Decisions
 
-- **Single file architecture** — Cloudflare Pages doesn't accept `.js` uploads directly; everything is compiled and inlined into one HTML file for deployment
-- **Firestore as backend** — No server needed; all business logic runs client-side with Firestore as the database
-- **Draft persistence** — Billing cart saved to localStorage on every change so a page refresh never loses work
-- **Atomic stock updates** — `FieldValue.increment()` used for stock changes to prevent race conditions during concurrent billing
-- **GST-exclusive pricing** — Entered price is always the taxable base; GST is added on top (standard for B2B electrical trade)
+- **Single file architecture** — Cloudflare Pages doesn't accept `.js` uploads; everything compiled and inlined into one HTML file
+- **Firestore as backend** — No server needed; all logic runs client-side
+- **Draft persistence** — Billing cart saved to localStorage on every change so refresh never loses work
+- **Atomic stock updates** — `FieldValue.increment()` prevents race conditions during concurrent billing
+- **GST-exclusive pricing** — Entered price is always the taxable base; GST added on top (standard for B2B electrical trade)
 
 ---
 
