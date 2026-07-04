@@ -1,21 +1,37 @@
-# Prakash Electricals — Billing & Inventory System
+# Billing & Inventory Management System
 
-A full-featured billing, invoicing, and inventory management system built for an electrical goods retailer.
+A full-featured billing, GST invoicing, and inventory management system built for an electrical goods retailer — designed to replace handwritten registers with a fast, accurate digital workflow.
 
-**Live demo:** [prakashelectricals.pages.dev](https://prakashelectricals.pages.dev)
+**🌐 Live demo:** [prakashelectricals.pages.dev](https://prakashelectricals.pages.dev)
+
+---
+
+## Screenshots
+
+| Dashboard | New Bill |
+|---|---|
+| ![Dashboard](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/dashboard.png) | ![Billing](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/billing.png) |
+
+| Product Master | Outstanding |
+|---|---|
+| ![Products](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/productmaster.PNG) | ![Outstanding](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/outstanding.PNG) |
+
+| Reports |
+|---|
+| ![Reports](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/report.PNG) |
 
 ---
 
 ## Features
 
-- **GST Tax Invoicing** — Retail Invoice, Tax Invoice, Quotation with correct CGST/SGST breakdown
-- **Party Management** — Customer ledger, credit limits, outstanding balance tracking
-- **Inventory** — 2,000+ SKU product master, stock-in history, low stock alerts, barcode labels
-- **Billing** — Cart persistence across refresh, draft auto-save, bill editing with supersede trail
+- **GST Tax Invoicing** — Retail Invoice, Tax Invoice, Quotation with correct CGST/SGST breakdown per Indian GST law
+- **Party Management** — Customer ledger, outstanding balance tracking, payment history
+- **Inventory** — 2,000+ SKU product master, stock-in history, low stock alerts, barcode label generation
+- **Billing** — Cart persistence across page refresh, draft auto-save, bill editing with full audit trail
 - **Payments** — Split payment modes (Cash, UPI, Credit), partial payment tracking
 - **Credit Notes** — Issue credit notes against existing bills
-- **Reports** — Sales, stock, party-wise outstanding
-- **Export** — CSV export of all data (Bills, Payments, Parties, Stock)
+- **Reports** — Sales, stock movement, party-wise outstanding
+- **Data Export** — CSV export of all data (Bills, Payments, Parties, Stock)
 - **Auto-log** — Every bill auto-logged to Google Sheets via Apps Script webhook
 - **Dark mode** — Full matte-black dark theme
 - **Multi-user** — Owner / Staff roles, session management
@@ -26,13 +42,13 @@ A full-featured billing, invoicing, and inventory management system built for an
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18 (JSX via Babel CDN, single-file) |
+| Frontend | React 18 (JSX via Babel CDN, single HTML file) |
 | Database | Firebase Firestore |
-| Auth | Firebase Authentication |
+| Auth | Firebase Authentication (Email/Password) |
 | Hosting | Cloudflare Pages |
-| Logging | Google Apps Script webhook |
+| Logging | Google Apps Script webhook → Google Sheets |
 
-No build step. No npm. One `index.html` file.
+**No build step. No npm. No bundler.** The entire application is one `index.html` file.
 
 ---
 
@@ -48,7 +64,7 @@ No build step. No npm. One `index.html` file.
 
 ### 2. Configure the app
 
-Open `src/index.html` and replace the `firebaseConfig` object:
+Open `index.html` and replace the `firebaseConfig` object:
 
 ```javascript
 firebase.initializeApp({
@@ -61,7 +77,7 @@ firebase.initializeApp({
 });
 ```
 
-Also update the `COMPANY` constant with your business details.
+Also update the `COMPANY` constant near the top with your business details.
 
 ### 3. Firestore Security Rules
 
@@ -78,34 +94,34 @@ service cloud.firestore {
 
 ### 4. Deploy
 
-Upload `src/index.html` to [Cloudflare Pages](https://pages.cloudflare.com) via direct upload (zip).
+Upload `index.html` to [Cloudflare Pages](https://pages.cloudflare.com) via direct upload.
 
 ### 5. First run
 
 1. Open the app → you'll see the Setup screen
 2. Create your owner account
-3. Go to Settings → Company and fill in your details
-4. Go to Settings → Data & Import to load your product master
-
----
-
-## Screenshots
-
-| Dashboard | New Bill | Product Master |
-|---|---|---|
-| *(add screenshot)* | *(add screenshot)* | *(add screenshot)* |
+3. Go to **Settings → Company** and fill in your business details
+4. Import your product master via **Settings → Data & Import**
 
 ---
 
 ## Project Structure
 
 ```
-src/
-└── index.html          # Entire app — React JSX, CSS, Firebase init
-sample-data/
-├── new_products.json   # Schema for product import
-└── stock_update.json   # Schema for stock update operations
+index.html              # Entire application — React JSX, CSS, Firebase init
+new_products.json       # Schema for product import (replace with your data)
+stock_update.json       # Schema for stock update operations
 ```
+
+---
+
+## Key Design Decisions
+
+- **Single file architecture** — Cloudflare Pages doesn't accept `.js` uploads directly; everything is compiled and inlined into one HTML file for deployment
+- **Firestore as backend** — No server needed; all business logic runs client-side with Firestore as the database
+- **Draft persistence** — Billing cart saved to localStorage on every change so a page refresh never loses work
+- **Atomic stock updates** — `FieldValue.increment()` used for stock changes to prevent race conditions during concurrent billing
+- **GST-exclusive pricing** — Entered price is always the taxable base; GST is added on top (standard for B2B electrical trade)
 
 ---
 
@@ -115,4 +131,4 @@ MIT — free to use and adapt for your own business.
 
 ---
 
-*Built with [Claude](https://claude.ai)*
+*Built with [Claude AI](https://claude.ai)*
