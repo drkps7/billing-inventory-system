@@ -26,13 +26,14 @@ A full-featured billing, GST invoicing, and inventory management system built fo
 
 - **GST Tax Invoicing** — Retail Invoice, Tax Invoice, Quotation with correct CGST/SGST breakdown per Indian GST law
 - **Party Management** — Customer ledger, outstanding balance tracking, payment history
-- **Inventory** — 2,000+ SKU product master, stock-in history, low stock alerts, barcode label generation
+- **Inventory Management** — 2,000+ SKU product master across Brand → Category → Series → Product hierarchy, stock-in history, low stock alerts
+- **QR Code & Barcode Labels** — Generate and print QR code / barcode labels for any product; batch print multiple SKUs at once for shelf labelling
 - **Billing** — Cart persistence across page refresh, draft auto-save, bill editing with full audit trail
 - **Payments** — Split payment modes (Cash, UPI, Credit), partial payment tracking
 - **Credit Notes** — Issue credit notes against existing bills
 - **Reports** — Sales, stock movement, party-wise outstanding
 - **Data Export** — CSV export of all data (Bills, Payments, Parties, Stock)
-- **Auto-log** — Every bill auto-logged to Google Sheets via Apps Script webhook
+- **Auto-log** — Every bill auto-logged to Google Sheets via Apps Script webhook in real time
 - **Dark mode** — Full matte-black dark theme
 - **Multi-user** — Owner / Staff roles, session management
 
