@@ -14,11 +14,11 @@ A full-featured billing, GST invoicing, and inventory management system built fo
 
 | Product Master | Outstanding |
 |---|---|
-| ![Products](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/productmaster.PNG) | ![Outstanding](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/outstanding.PNG) |
+| ![Products](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/product.png) | ![Outstanding](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/outstanding.png) |
 
 | Reports |
 |---|
-| ![Reports](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/report.PNG) |
+| ![Reports](https://raw.githubusercontent.com/drkps7/billing-inventory-system/main/report.png) |
 
 ---
 
